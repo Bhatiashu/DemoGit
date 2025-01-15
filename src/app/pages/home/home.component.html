@@ -1,0 +1,137 @@
+<nav class="flex flex-wrap justify-between items-center p-6 bg-blue-600 shadow-lg gap-4">
+  <!-- Search Section -->
+  <div class="flex flex-wrap gap-4 items-center w-full md:w-auto">
+    <!-- First Name Field -->
+    <div class="flex flex-col">
+      <label for="firstname" class="text-white mb-1">First Name:</label>
+      <input
+        type="text"
+        id="firstname"
+        [(ngModel)]="searchParams.firstname"
+        placeholder="Enter First Name"
+        class="p-2 rounded-md border border-gray-300 focus:ring-2 focus:ring-blue-300"
+      />
+    </div>
+
+    <!-- Mobile Number Field -->
+    <div class="flex flex-col">
+      <label for="mobile" class="text-white mb-1">Mobile Number:</label>
+      <input
+        type="text"
+        id="mobile"
+        [(ngModel)]="searchParams.mobile"
+        placeholder="Enter Mobile Number"
+        class="p-2 rounded-md border border-gray-300 focus:ring-2 focus:ring-blue-300"
+      />
+    </div>
+
+    <!-- Date Fields -->
+    <div class="flex flex-col">
+      <label for="startDate" class="text-white mb-1">Start Date:</label>
+      <input
+        type="date"
+        id="startDate"
+        [(ngModel)]="searchParams.startDate"
+        class="p-2 rounded-md border border-gray-300 focus:ring-2 focus:ring-blue-300"
+      />
+    </div>
+
+    <div class="flex flex-col">
+      <label for="endDate" class="text-white mb-1">End Date:</label>
+      <input
+        type="date"
+        id="endDate"
+        [(ngModel)]="searchParams.endDate"
+        class="p-2 rounded-md border border-gray-300 focus:ring-2 focus:ring-blue-300"
+      />
+    </div>
+
+    <!-- Search Button -->
+    <div class="flex flex-col items-start mt-6">
+      <button
+        (click)="onSearch()"
+        class="bg-white text-blue-600 font-medium px-6 py-2 rounded-md hover:bg-blue-500 hover:text-white transition-all border border-gray-300"
+      >
+        Search
+      </button>
+    </div>
+  </div>
+
+  <!-- Navigation Section -->
+  <div class="flex gap-4 items-center w-full md:w-auto justify-end">
+    <span
+      routerLink="/login"
+      class="text-sm text-gray-200 cursor-pointer hover:underline hover:text-indigo-200"
+    >
+      Login
+    </span>
+    <span
+      routerLink="/register"
+      class="text-sm text-gray-200 cursor-pointer hover:underline hover:text-indigo-200"
+    >
+      Register
+    </span>
+    <span
+      routerLink="/login"
+      (click)="onLogout()"
+      class="text-sm text-gray-200 cursor-pointer hover:underline hover:text-indigo-200"
+    >
+      Logout
+    </span>
+  </div>
+</nav>
+
+<div class="p-6">
+  <!-- Table to display the data -->
+  <div class="overflow-x-auto">
+    <table class="min-w-full border-collapse border border-gray-200">
+      <thead class="bg-gray-100">
+        <tr>
+          <th class="border border-gray-200 px-4 py-2 text-left">First Name</th>
+          <th class="border border-gray-200 px-4 py-2 text-left">Last Name</th>
+          <th class="border border-gray-200 px-4 py-2 text-left">Email</th>
+          <th class="border border-gray-200 px-4 py-2 text-left">Mobile Number</th>
+          <th class="border border-gray-200 px-4 py-2 text-left">Created Date</th>
+          <th class="border border-gray-200 px-4 py-2 text-left">Age</th>
+          <th class="border border-gray-200 px-4 py-2 text-left">Father's Name</th>
+          <th class="border border-gray-200 px-4 py-2 text-left">Address</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let row of Data" class="even:bg-gray-100 odd:bg-white">
+          <td class="border border-gray-200 px-4 py-2">{{ row.firstname }}</td>
+          <td class="border border-gray-200 px-4 py-2">{{ row.lastname }}</td>
+          <td class="border border-gray-200 px-4 py-2">{{ row.email }}</td>
+          <td class="border border-gray-200 px-4 py-2">{{ row.mobile }}</td>
+          <td class="border border-gray-200 px-4 py-2">{{ row.createdAt }}</td>
+          <td class="border border-gray-200 px-4 py-2">{{ row.details?.age || 'N/A' }}</td>
+          <td class="border border-gray-200 px-4 py-2">{{ row.details?.fatherName || 'N/A' }}</td>
+          <td class="border border-gray-200 px-4 py-2">{{ row.address?.address || 'N/A' }}</td>
+
+        </tr>
+      </tbody>
+
+    </table>
+  </div>
+
+  <!-- Message when no data is available -->
+</div>
+
+
+
+<!-- Pagination Controls -->
+<div class="pagination">
+  <button (click)="goToPrevPage()" [disabled]="currentPage === 1">Previous</button>
+  <span style="padding-left:0.15cm;">{{ currentPage }} of {{ totalPages }}</span>
+  <button (click)="goToNextPage()" [disabled]="currentPage === totalPages">Next</button>
+</div>
+
+
+
+
+<footer class="w-full fixed bottom-0 bg-gray-500">
+    <span class="text-white h-7 flex mt-4 justify-center items-center">MEAN STACK AUTH</span>
+</footer>
+
+
+
